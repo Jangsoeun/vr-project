@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <a-scene>a
+      <!-- 홈 버튼 -->
+      <a-image id="homeButton" src="./img/icon/home-icon.png" position="-1.1 0.7 9" rotation="0 0 0" width="0.2" height="0.2" class="home-button" 
+               material="opacity: 0.9"></a-image>
+
+      <img id="background" src="./img/background2.jpg">
+      <a-asset-item id="PBV" src="https://drive.google.com/uc?export=download&id=1fOtImIwa8lGGN8bOlRg3Fyth9OR5sxDi"></a-asset-item>
+
+        
+      <a-assets> 
+        <img id="background" src="./img/background.jpg">
+        <img id="hud" src="./img/01/hud.png"> 
+        <img id="driving1" src="./img/01/driving1.png">
+        <img id="driving2" src="./img/01/driving2.png">
+        <img id="driving3" src="./img/01/driving3.png">
+        <img id="main01" src="./img/01/main_lg.png">
+        <img id="main02" src="./img/01/main_m.png">
+        <img id="rightside01Image" src="./img/01/side_01.png" visible="false">
+        <img id="rightside02" src="./img/01/side_02.png">
+        <img id="control01" src="./img/01/control.png">
+        <img id="button1Image" src="./img/01/button1text.png" visible="false"> <!-- 버튼 이미지 추가 -->
+      </a-assets> 
+  
+      <!-- 카메라와 커서 추가 -->
+      <!-- <a-entity position="-0.2 -1.45 9.65" rotation="0 35 0"> -->
+        <a-camera position="0 0 10" rotation="0 0 0">
+          <a-cursor rayOrigin="mouse" fuse="false"
+          material="color: white; shader: flat;"
+          geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;">
+        </a-cursor>
+        </a-camera>
+      <!-- </a-entity> -->
+  
+      <a-entity gltf-model="#PBV" position="2 -0.5 9.8" rotation="0 270 0"></a-entity> 
+  
+      <a-sky src="#background"></a-sky>
+
+      <!-- Driving Images -->
+      <a-plane id="driving1Plane" position="0 0 8.9" geometry="primitive: plane; height: 0.3; width: 1; scale:0.8" material="src: #driving1; opacity: 0.9" rotation="0 0 0" visible="false"
+               animation="property: scale; from: 0.5 0.5 1; to: 1 1 1; dur: 1000; easing: easeInOutQuad;"></a-plane>
+      <a-plane id="driving3Plane" position="0 0 8.9" geometry="primitive: plane; height: 0.1; width: 1" material="src: #driving3; opacity: 0.9" rotation="0 0 0" visible="false"
+               animation="property: scale; from: 0.5 0.5 1; to: 1 1 1; dur: 1000; easing: easeInOutQuad;"></a-plane>
+  
+      <!-- MAIN 화면들 -->
+      <a-plane id="main01Plane" position="0 0 8.9" geometry="primitive: plane; height: 0.6; width: 1" material="src: #main01; opacity: 0.9" rotation="0 0 0" visible="false"
+               animation="property: scale; from: 0.5 0.5 1; to: 1 1 1; dur: 1000; easing: easeInOutQuad;"></a-plane>
+      <a-plane id="main02Plane" position="0.5 0.2 8.9" geometry="primitive: plane; height: 0.5; width: 0.4" material="src: #main02; opacity: 0.9" rotation="0 0 0" visible="false"
+               animation="property: scale; from: 0.5 0.5 1; to: 1 1 1; dur: 1000; easing: easeInOutQuad;"></a-plane>
+      <a-plane id="button1" position="0 0 9" geometry="primitive: plane; height: 0.5; width: 0.7" material="src: #button1Image; opacity: 0.9" rotation="0 0 0" visible="false"
+              animation="property: scale; from: 0.5 0.5 1; to: 1 1 1; dur: 1000; easing: easeInOutQuad;"></a-plane>
+
+      <!-- 주행 시작 메시지 -->
+      <a-plane id="messageBackground" position="0 -0.6 8.9" rotation="0 35 0" geometry="primitive: plane; height: 0.1; width: 1" material="color: black; opacity: 0.5" visible="false"></a-plane>
+      <a-text id="messageText" value="주행을 시작합니다!" position="-0.7 -0.6 9" rotation="0 35 0" material="color: white; opacity: 0.9" width="5" height="1" align="center" visible="false"></a-text>
+
+      <!-- HUD 화면 추가 -->
+      <a-plane id="hudPlane" position="-0.5 -0.4 8.5" rotation="0 0 0" geometry="primitive: plane; height: 0.2; width: 0.4" material="src: #hud; opacity: 0.9" visible="false"></a-plane>
+
+      <!-- 안내 문구 -->
+      <a-text id="hoverText" value="사이드 화면을 확인해보세요" position="-1 0.3 8.9" rotation="0 35 0" color="white" visible="false"></a-text>
+
+      <!-- 오른쪽 사이드 디스플레이 화면 -->
+      <a-plane id="rightside01" src='#rightside01Image' position="1.6 0.2 9" width="1" height="1.3" rotation="0 -80 0" material="opacity: 0.9" visible="false"></a-plane>
+      <!-- <a-plane class="rightside02" src='#rightside02' position="0.3 0.35 8" width="1" height="1.3" rotation="0 -60 0" material="opacity: 0.9" visible="false"></a-plane> -->
+        
+      <!-- 왼쪽 사이드 디스플레이 화면 --> 
+      <!-- <a-plane class="leftside" color="yellow" position="-2 0.3 9.6" width="40px" height="20px" rotation="0 100 0" material="opacity: 0"></a-plane> -->
+
+    </a-scene>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        let driving1Plane = document.querySelector('#driving1Plane');
+        let driving3Plane = document.querySelector('#driving3Plane');
+        let main01Plane = document.querySelector('#main01Plane');
+        let main02Plane = document.querySelector('#main02Plane');
+        let messageBackground = document.querySelector('#messageBackground');
+        let messageText = document.querySelector('#messageText');
+        let hudPlane = document.querySelector('#hudPlane');
+        let button1 = document.querySelector('#button1');
+        let rightside01 = document.querySelector('#rightside01');
+        let hoverText = document.querySelector('#hoverText');
+        let homeButton = document.querySelector('#homeButton');
+
+        // 1. 5초 후 driving1 이미지 나타남
+        setTimeout(function() {
+          driving1Plane.setAttribute('visible', true);
+          driving1Plane.setAttribute('animation__scale', 'property: scale; from: 0.5 0.5 1; to: 1 1 1; dur: 1000; easing: easeInOutQuad;');
+        }, 5000);
+
+        // 2. driving1이 3초 후 사라지고 driving3 나타남
+        setTimeout(function() {
+          driving1Plane.setAttribute('animation__opacity', 'property: opacity; from: 0.9; to: 0; dur: 1000; easing: easeInOutQuad;');
+          driving1Plane.setAttribute('visible', false);
+          driving3Plane.setAttribute('visible', true);
+          driving3Plane.setAttribute('animation__scale', 'property: scale; from: 0.5 0.5 1; to: 1 1 1; dur: 1000; easing: easeInOutQuad;');
+        }, 8000); // 5초 + 3초
+
+        // 3. driving3가 3초 후 위로 이동하고 main_lg 나타남
+        setTimeout(function() {
+          driving3Plane.object3D.position.y += 0.4;
+          main01Plane.setAttribute('visible', true);
+          main01Plane.setAttribute('animation__scale', 'property: scale; from: 0.5 0.5 1; to: 1 1 1; dur: 1000; easing: easeInOutQuad;');
+        }, 11000); // 8초 + 3초
+
+        // 4. 5초 후 driving3와 main_lg가 사라지고 main_m 나타남
+        setTimeout(function() {
+          driving3Plane.setAttribute('animation__opacity', 'property: opacity; from: 0.9; to: 0; dur: 1000; easing: easeInOutQuad;');
+          driving3Plane.setAttribute('visible', false);
+          main01Plane.setAttribute('animation__opacity', 'property: opacity; from: 0.9; to: 0; dur: 1000; easing: easeInOutQuad;');
+          main01Plane.setAttribute('visible', false);
+          main02Plane.setAttribute('visible', true);
+          main02Plane.setAttribute('animation__scale', 'property: scale; from: 0.5 0.5 1; to: 1 1 1; dur: 1000; easing: easeInOutQuad;');
+          messageBackground.setAttribute('visible', true);
+          messageText.setAttribute('visible', true);
+          hudPlane.setAttribute('visible', true);
+        }, 16000); // 11초 + 5초
+
+        // 5. main_m가 5초 후 사라짐
+        setTimeout(function() {
+          main02Plane.setAttribute('animation__opacity', 'property: opacity; from: 0.9; to: 0; dur: 1000; easing: easeInOutQuad;');
+          main02Plane.setAttribute('visible', false);
+        }, 21000); // 16초 + 5초
+
+        setTimeout(() => {
+        button1.setAttribute('visible', 'true');
+        
+        // visible이 true가 된 후에 이벤트를 등록합니다.
+        button1.addEventListener('click', function() {
+          rightside01.setAttribute('visible', 'true');
+          console.log('버튼이 클릭되었습니다.');
+        });
+
+        console.log('버튼이 나타났습니다.');
+      }, 21000);
+
+
+        // 홈 버튼 클릭 시 index.html로 돌아가기
+        homeButton.addEventListener('click', function() {
+          console.log('홈버튼이 클릭되었습니다.');
+          window.location.href = 'index.html';
+        });
+
+
+
+
+
+      });
+    </script>
+  </body>
+</html>

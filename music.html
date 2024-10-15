@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/aframe-draggable-component@3.0.1/dist/aframe-draggable-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <!-- 홈 버튼 -->
+      <a-image id="homeButton" src="./img/icon/home-icon.png" position="-1.1 0.7 9" 
+               width="0.2" height="0.2" material="opacity: 0.9"></a-image>
+
+      <img id="background" src="./img/background2.jpg">
+
+      <a-asset-item id="PBV" src="./glb/PBV.glb"></a-asset-item>
+      <a-assets>
+        <img id="mainbg" src="./img/02/main00.png" alt="">
+        <img id="main01" src="./img/02/main1.png" alt="">
+        <img id="main02" src="./img/02/main2.png" alt="">
+        <img id="main03" src="./img/02/main3.png" alt="">
+        <img id="main04" src="./img/02/main4.png" alt="">
+        <img id="main05" src="./img/02/main5.png" alt="">
+        <img id="main06" src="./img/02/main6.png" alt="">
+        <img id="main07" src="./img/02/main7.png" alt="">
+        <img id="left1" src="./img/02/left1.png" alt="">
+        <img id="left2" src="./img/02/left2.png" alt="">
+        <img id="right1" src="./img/02/right1.png" alt="">
+      </a-assets>
+
+      <a-camera position="0 0 10">
+        <a-cursor rayOrigin="mouse" fuse="false"
+                  material="color: white; shader: flat;"
+                  geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;">
+        </a-cursor>
+      </a-camera>
+
+      <!-- PBV 모델 -->
+      <a-entity gltf-model="#PBV" position="2 -0.5 9.8" rotation="0 270 0"></a-entity>
+
+      <a-sky src="#background"></a-sky>
+
+      <!-- 이미지 그룹 -->
+      <a-entity id="thumbnailGroup" position="0.15 0 8.5">
+        <a-plane class="thumbnail" id="main01Plane" position="-0.7 0 0.45" width="0.3" height="0.4" 
+                 material="src: #main01; opacity: 0.8" draggable></a-plane>
+        <a-plane class="thumbnail" id="main02Plane" position="-0.35 0 0.45" width="0.3" height="0.4" 
+                 material="src: #main02; opacity: 0.8" draggable></a-plane>
+        <a-plane class="thumbnail" id="main03Plane" position="0 0 0.45" width="0.3" height="0.4" 
+                 material="src: #main03; opacity: 0.8" draggable></a-plane>
+        <a-plane class="thumbnail" id="main04Plane" position="0.35 0 0.45" width="0.3" height="0.4" 
+                 material="src: #main04; opacity: 0.8" draggable></a-plane>
+
+        <!-- 숨겨진 이미지들 -->
+        <a-plane id="main05Plane" position="-0.15 0.1 0.4" width="1.2" height="0.6" 
+                 material="src: #main05; opacity: 0.8" visible="false"></a-plane>
+
+        <a-plane id="main06Plane" position="-0.15 0.1 0.4" width="1.2" height="0.5" 
+                 material="src: #main06; opacity: 0.8" visible="false"></a-plane>
+
+        <a-plane id="main07Plane" position="-0.15 0.1 0.4" width="1.2" height="0.6" 
+                 material="src: #main07; opacity: 0.8" visible="false"></a-plane>                
+      </a-entity>
+
+      <!-- 오른쪽 사이드 디스플레이 화면 -->
+      <a-plane class="rightside" src="#right1" position="0.8 0 9.6" width="0.5" height="1" 
+               rotation="0 -100 0" material="opacity: 0.9"></a-plane>
+
+      <!-- 왼쪽 사이드 디스플레이 화면 -->
+      <a-entity position="-1.5 0.2 9.6" rotation="0 80 0">
+        <a-plane src="#left1" position="0 0 1" width="0.4" height="0.2" 
+                 material="opacity: 0.9"></a-plane>
+        <a-plane src="#left2" position="0 -0.25 1" width="0.4" height="0.2" 
+                 material="opacity: 0.9"></a-plane>
+      </a-entity>
+    </a-scene>
+    
+
+    <script>
+      // 호버 시 이미지 확대 애니메이션
+      const thumbnails = document.querySelectorAll('.thumbnail');
+      
+      thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('mouseenter', () => {
+          thumbnail.setAttribute('animation', {
+            property: 'scale',
+            to: '1.1 1.1 1',
+            dur: 300,
+            easing: 'easeInOutQuad'
+          });
+        });
+    
+        thumbnail.addEventListener('mouseleave', () => {
+          thumbnail.setAttribute('animation', {
+            property: 'scale',
+            to: '1 1 1',
+            dur: 300,
+            easing: 'easeInOutQuad'
+          });
+        });
+      });
+    
+      // #main01 클릭 시 모든 썸네일 숨기고 #main05 표시
+      document.getElementById('main01Plane').addEventListener('click', () => {
+        thumbnails.forEach(thumbnail => {
+          thumbnail.setAttribute('visible', 'false'); // 썸네일 숨기기
+        });
+    
+        document.getElementById('main05Plane').setAttribute('visible', 'true'); // #main05 표시
+      });
+    
+      //  #main05 → #main06 → #main07
+      const main05Plane = document.getElementById('main05Plane');
+      const main06Plane = document.getElementById('main06Plane');
+      const main07Plane = document.getElementById('main07Plane');
+    
+      main05Plane.addEventListener('click', () => {
+        console.log('클릭되었습니다.')
+        main05Plane.setAttribute('visible', 'false'); // #main05 숨기기
+        main06Plane.setAttribute('visible', 'true');  // #main06 표시
+      });
+    
+      main06Plane.addEventListener('click', () => {
+        console.log('음악이 재생됩니다.')
+        main06Plane.setAttribute('visible', 'false'); // #main06 숨기기
+        main07Plane.setAttribute('visible', 'true');  // #main07 표시
+      });
+    </script>
+    
+    
+  </body>
+</html>
