@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/aframe-draggable-component@3.0.1/dist/aframe-draggable-component.min.js"></script>
   </head>
@@ -12,8 +12,8 @@
                width="0.2" height="0.2" material="opacity: 0.9"></a-image>
 
       <img id="background" src="./img/background2.jpg">
-      <a-asset-item id="PBV" src="https://cdn.jsdelivr.net/gh/Jangsoeun/PBV/glb/PBV.glb"></a-asset-item>
-      
+      <a-asset-item id="PBV" src="https://cdn.jsdelivr.net/gh/Jangsoeun/PBV@latest/glb/PBV.glb"></a-asset-item>
+
       <a-assets>
         <img id="mainbg" src="./img/03/main00.png" alt="">
         <img id="main01" src="./img/03/main1-1.png" alt="">
@@ -38,8 +38,7 @@
       </a-camera>
 
       <!-- PBV 모델 -->
-      <a-entity gltf-model="#PBV" position="2 -0.5 9.8" rotation="0 270 0"></a-entity>
-
+      <a-entity id="pbvEntity" gltf-model="#PBV" position="0 0 -3" rotation="0 0 0"></a-entity>
       <a-sky src="#background"></a-sky>
 
       <!-- 이미지 그룹 -->
@@ -87,6 +86,15 @@
     
 
     <script>
+
+document.querySelector('#pbvEntity').addEventListener('model-loaded', () => {
+    console.log('GLB 모델이 성공적으로 로드되었습니다!');
+  });
+
+  document.querySelector('#pbvEntity').addEventListener('model-error', (e) => {
+    console.error('모델 로드 중 오류:', e.detail);
+  });
+
         // 호버 시 이미지 확대 애니메이션
         const thumbnails = document.querySelectorAll('.thumbnail');
       
