@@ -21,8 +21,10 @@
 
       <a-entity position="-0.2 -1.45 9.65" rotation="0 35 0">
         <a-camera>
-          <a-entity id="leftController" oculus-touch-controls="hand: left" raycaster="objects: .clickable"></a-entity>
-          <a-entity id="rightController" oculus-touch-controls="hand: right" raycaster="objects: .clickable"></a-entity>
+          <a-cursor rayOrigin="mouse" fuse="false"
+          material="color: white; shader: flat;"
+          geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;">
+        </a-cursor>
         </a-camera>
       </a-entity>
 
