@@ -13,7 +13,6 @@
 
       <img id="background" src="./img/background2.jpg">
 
-
       <a-assets>
         <img id="mainbg" src="./img/03/main00.png" alt="">
         <img id="main01" src="./img/03/main1-1.png" alt="">
@@ -27,8 +26,7 @@
         <img id="main09" src="./img/03/main2.png" alt="">      
         <img id="left01" src="./img/03/left01.png" alt="">
         <img id="right01" src="./img/03/right01.png" alt="">
-        <a-asset-item id="PBV" src="https://raw.githubusercontent.com/Jangsoeun/PBV/main/glb/PBV.glb"></a-asset-item>
-
+        <a-asset-item id="PBV" src="http://cdn.tudesign.org/pbv_model.glb"></a-asset-item>
       </a-assets>
 
       <a-camera position="0 0 10">
@@ -60,77 +58,71 @@
                  material="src: #main07; opacity: 0.9" draggable></a-plane>
         <a-plane class="thumbnail" id="main08Plane" position="0.15 -0.05 0.45" width="0.2" height="0.15" 
                  material="src: #main08; opacity: 0.9" draggable></a-plane>
-        </a-entity>
+      </a-entity>
 
-        <!-- 메인 -->
-        <a-entity  position="0.15 0 8.5">
-            <a-plane id="main09Plane" position="-0.2 0.1 0.4" width="1.2" height="0.7" 
-                    material="src: #main09; opacity: 0.8" visible="false"></a-plane>
-        </a-entity>
+      <!-- 메인 -->
+      <a-entity position="0.15 0 8.5">
+          <a-plane id="main09Plane" position="-0.2 0.1 0.4" width="1.2" height="0.7" 
+                  material="src: #main09; opacity: 0.8" visible="false"></a-plane>
+      </a-entity>
 
-        <!-- 왼쪽 사이드 -->
-        <a-entity position="-1.7 0.1 9" rotation="0 90 0">
-            <a-plane id="left01Plane" width="1.45" height="1.2" 
-                    material="src: #left01; opacity: 0.8" visible="false"></a-plane>
-        </a-entity>
-        
-        <!-- 오른쪽 사이드 -->
-        <a-entity position="1.6 0.1 9" rotation="0 -90 0">
-            <a-plane id="right01Plane" width="1.45" height="1.2" 
-                    material="src: #right01; opacity: 0.8" visible="false"></a-plane>
-        </a-entity>
-
+      <!-- 왼쪽 사이드 -->
+      <a-entity position="-1.7 0.1 9" rotation="0 90 0">
+          <a-plane id="left01Plane" width="1.45" height="1.2" 
+                  material="src: #left01; opacity: 0.8" visible="false"></a-plane>
+      </a-entity>
+      
+      <!-- 오른쪽 사이드 -->
+      <a-entity position="1.6 0.1 9" rotation="0 -90 0">
+          <a-plane id="right01Plane" width="1.45" height="1.2" 
+                  material="src: #right01; opacity: 0.8" visible="false"></a-plane>
+      </a-entity>
 
     </a-scene>
     
-
     <script>
+      document.querySelector('#pbvEntity').addEventListener('model-loaded', () => {
+        console.log('GLB 모델이 성공적으로 로드되었습니다!');
+      });
 
-document.querySelector('#pbvEntity').addEventListener('model-loaded', () => {
-    console.log('GLB 모델이 성공적으로 로드되었습니다!');
-  });
+      document.querySelector('#pbvEntity').addEventListener('model-error', (e) => {
+        console.error('모델 로드 중 오류:', e.detail);
+      });
 
-  document.querySelector('#pbvEntity').addEventListener('model-error', (e) => {
-    console.error('모델 로드 중 오류:', e.detail);
-  });
-
-        // 호버 시 이미지 확대 애니메이션
-        const thumbnails = document.querySelectorAll('.thumbnail');
+      // 호버 시 이미지 확대 애니메이션
+      const thumbnails = document.querySelectorAll('.thumbnail');
       
-        thumbnails.forEach(thumbnail => {
-          thumbnail.addEventListener('mouseenter', () => {
-            thumbnail.setAttribute('animation', {
-              property: 'scale',
-              to: '1.1 1.1 1',
-              dur: 300,
-              easing: 'easeInOutQuad'
-            });
-          });
-      
-          thumbnail.addEventListener('mouseleave', () => {
-            thumbnail.setAttribute('animation', {
-              property: 'scale',
-              to: '1 1 1',
-              dur: 300,
-              easing: 'easeInOutQuad'
-            });
+      thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('mouseenter', () => {
+          thumbnail.setAttribute('animation', {
+            property: 'scale',
+            to: '1.1 1.1 1',
+            dur: 300,
+            easing: 'easeInOutQuad'
           });
         });
       
-        // #main01Plane 클릭 시 처리
-        document.getElementById('main01Plane').addEventListener('click', () => {
-          // 모든 썸네일과 메인 배경 숨기기
-          document.getElementById('mainbgPlane').setAttribute('visible', 'false');
-          thumbnails.forEach(thumbnail => thumbnail.setAttribute('visible', 'false'));
-      
-          // #main02Plane, 왼쪽 및 오른쪽 사이드 표시
-          document.getElementById('main09Plane').setAttribute('visible', 'true');
-          document.getElementById('right01Plane').setAttribute('visible', 'true');
-          document.getElementById('left01Plane').setAttribute('visible', 'true');
+        thumbnail.addEventListener('mouseleave', () => {
+          thumbnail.setAttribute('animation', {
+            property: 'scale',
+            to: '1 1 1',
+            dur: 300,
+            easing: 'easeInOutQuad'
+          });
         });
-      </script>
+      });
       
-    
-    
+      // #main01Plane 클릭 시 처리
+      document.getElementById('main01Plane').addEventListener('click', () => {
+        // 모든 썸네일과 메인 배경 숨기기
+        document.getElementById('mainbgPlane').setAttribute('visible', 'false');
+        thumbnails.forEach(thumbnail => thumbnail.setAttribute('visible', 'false'));
+      
+        // #main02Plane, 왼쪽 및 오른쪽 사이드 표시
+        document.getElementById('main09Plane').setAttribute('visible', 'true');
+        document.getElementById('right01Plane').setAttribute('visible', 'true');
+        document.getElementById('left01Plane').setAttribute('visible', 'true');
+      });
+    </script>
   </body>
 </html>
