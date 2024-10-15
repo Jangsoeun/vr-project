@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <a-asset-item id="PBV" src="https://drive.google.com/uc?export=download&id=1fOtImIwa8lGGN8bOlRg3Fyth9OR5sxDi"></a-asset-item>
+      </a-assets>
+
+      <a-entity gltf-model="#PBV" position="0 0 -5" scale="1 1 1"></a-entity>
+    </a-scene>
+
+    <script>
+      // GLB 파일 로드 상태 확인
+      const assetItem = document.querySelector('#PBV');
+
+      // GLB 파일이 성공적으로 로드된 경우
+      assetItem.addEventListener('loaded', () => {
+        console.log('GLB 파일이 성공적으로 로드되었습니다!');
+      });
+
+      // GLB 파일 로드 실패 시
+      assetItem.addEventListener('error', (e) => {
+        console.error('GLB 파일 로드 실패:', e);
+      });
+    </script>
+  </body>
+</html>

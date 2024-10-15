@@ -12,7 +12,7 @@
                width="0.2" height="0.2" material="opacity: 0.9"></a-image>
 
       <img id="background" src="./img/background2.jpg">
-      <a-asset-item id="PBV" src="https://cdn.jsdelivr.net/gh/Jangsoeun/PBV@latest/glb/PBV.glb"></a-asset-item>
+
 
       <a-assets>
         <img id="mainbg" src="./img/03/main00.png" alt="">
@@ -27,18 +27,17 @@
         <img id="main09" src="./img/03/main2.png" alt="">      
         <img id="left01" src="./img/03/left01.png" alt="">
         <img id="right01" src="./img/03/right01.png" alt="">
+        <a-asset-item id="PBV" src="https://raw.githubusercontent.com/Jangsoeun/PBV/main/glb/PBV.glb"></a-asset-item>
 
       </a-assets>
 
       <a-camera position="0 0 10">
-        <a-cursor rayOrigin="mouse" fuse="false"
-                  material="color: white; shader: flat;"
-                  geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;">
-        </a-cursor>
+        <a-entity id="leftController" oculus-touch-controls="hand: left"></a-entity>
+        <a-entity id="rightController" oculus-touch-controls="hand: right"></a-entity>
       </a-camera>
 
       <!-- PBV 모델 -->
-      <a-entity id="pbvEntity" gltf-model="#PBV" position="0 0 -3" rotation="0 0 0"></a-entity>
+      <a-entity id="pbvEntity" gltf-model="#PBV" position="0 0 9" scale="1 1 1"></a-entity>
       <a-sky src="#background"></a-sky>
 
       <!-- 이미지 그룹 -->
