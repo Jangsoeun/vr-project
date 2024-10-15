@@ -25,16 +25,22 @@
         <img id="main08" src="./img/03/main1-8.png" alt=""> 
         <img id="main09" src="./img/03/main2.png" alt="">      
         <img id="left01" src="./img/03/left01.png" alt="">
-        <img id="right01" src="./img/03/right01.png" alt="">
-        <a-asset-item id="PBV" src="https://drive.google.com/uc?id=1kJy2WARrxRrAQodgZmz9-IvsZVVmY7mi"></a-asset-item>      </a-assets>
+        <img id="left02" src="./img/03/left02.png" alt="">
+        <img id="left03" src="./img/03/left03.png" alt="">
+        <img id="chevron-left" src="./img/03/chevron-left.png" alt="">
+        <img id="chevron-right" src="./img/03/chevron-right.png" alt="">
+        <a-asset-item id="PBV" src="./glb/13.glb"></a-asset-item>
+      </a-assets>
 
       <a-camera position="0 0 10">
-        <a-entity id="leftController" oculus-touch-controls="hand: left"></a-entity>
-        <a-entity id="rightController" oculus-touch-controls="hand: right"></a-entity>
+        <a-cursor rayOrigin="mouse" fuse="false"
+        material="color: white; shader: flat;"
+        geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;">
+      </a-cursor>
       </a-camera>
 
       <!-- PBV 모델 -->
-      <a-entity id="pbvEntity" gltf-model="#PBV" position="0 0 9" scale="1 1 1"></a-entity>
+      <a-entity id="pbvEntity" gltf-model="#PBV" position="2 -0.5 9.8" scale="1 1 1" rotation="0 270 0"></a-entity>
       <a-sky src="#background"></a-sky>
 
       <!-- 이미지 그룹 -->
@@ -67,8 +73,16 @@
 
       <!-- 왼쪽 사이드 -->
       <a-entity position="-1.7 0.1 9" rotation="0 90 0">
-          <a-plane id="left01Plane" width="1.45" height="1.2" 
+          <a-plane id="left01Plane" width="1.6" height="1.2" position="-0.1 0 0"
                   material="src: #left01; opacity: 0.8" visible="false"></a-plane>
+          <a-entity position="-0.9 -0.1 0.6"> <!-- chevrons의 위치를 조정 -->
+            <a-image id="chevronLeft" src="#chevron-left" width="0.08" height="0.08" position="0 0 0.2"
+                      event-set__mouseenter="scale: 1.1 1.1 1; dur: 300"
+                      event-set__mouseleave="scale: 1 1 1; dur: 300"></a-image>
+            <a-image id="chevronRight" src="#chevron-right" width="0.08" height="0.08" position="0.75 0 0.2"
+                      event-set__mouseenter="scale: 1.1 1.1 1; dur: 300"
+                      event-set__mouseleave="scale: 1 1 1; dur: 300" position="0.25 0 0"></a-image> <!-- 옆으로 이동 -->
+          </a-entity>
       </a-entity>
       
       <!-- 오른쪽 사이드 -->
@@ -121,6 +135,26 @@
         document.getElementById('main09Plane').setAttribute('visible', 'true');
         document.getElementById('right01Plane').setAttribute('visible', 'true');
         document.getElementById('left01Plane').setAttribute('visible', 'true');
+      });
+
+      // Chevron 버튼 클릭 처리
+      let currentLeftImageIndex = 1; // 1: left01, 2: left02, 3: left03
+      const leftImages = ['left01', 'left02', 'left03'];
+
+      // Chevron Right 클릭 이벤트
+      document.getElementById('chevronRight').addEventListener('click', () => {
+        if (currentLeftImageIndex < leftImages.length) {
+          currentLeftImageIndex++;
+          document.getElementById('left01Plane').setAttribute('material', 'src: #' + leftImages[currentLeftImageIndex - 1]);
+        }
+      });
+
+      // Chevron Left 클릭 이벤트
+      document.getElementById('chevronLeft').addEventListener('click', () => {
+        if (currentLeftImageIndex > 1) {
+          currentLeftImageIndex--;
+          document.getElementById('left01Plane').setAttribute('material', 'src: #' + leftImages[currentLeftImageIndex - 1]);
+        }
       });
     </script>
   </body>
