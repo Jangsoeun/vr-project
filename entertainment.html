@@ -1,95 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/aframe-draggable-component@3.0.1/dist/aframe-draggable-component.min.js"></script>
-  </head>
-  <body>
+</head>
+<body>
     <a-scene>
-      <!-- 홈 버튼 -->
-      <a-image id="homeButton" src="./img/icon/home-icon.png" position="-1.1 0.7 9" 
-               width="0.2" height="0.2" material="opacity: 0.9"></a-image>
+        <!-- 홈 버튼 -->
+        <a-image id="homeButton" src="./img/icon/home-icon.png" position="-1.1 0.7 9" 
+                 width="0.2" height="0.2" material="opacity: 0.9"></a-image>
 
-      <img id="background" src="./img/background2.jpg">
+        <img id="background" src="./img/background2.jpg">
 
-      <a-assets>
-        <img id="mainbg" src="./img/03/main00.png" alt="">
-        <img id="main01" src="./img/03/main1-1.png" alt="">
-        <img id="main02" src="./img/03/main1-2.png" alt="">
-        <img id="main03" src="./img/03/main1-3.png" alt="">
-        <img id="main04" src="./img/03/main1-4.png" alt="">
-        <img id="main05" src="./img/03/main1-5.png" alt="">
-        <img id="main06" src="./img/03/main1-6.png" alt="">
-        <img id="main07" src="./img/03/main1-7.png" alt="">
-        <img id="main08" src="./img/03/main1-8.png" alt=""> 
-        <img id="main09" src="./img/03/main2.png" alt="">      
-        <img id="left01" src="./img/03/left01.png" alt="">
-        <img id="left02" src="./img/03/left02.png" alt="">
-        <img id="left03" src="./img/03/left03.png" alt="">
-        <img id="chevron-left" src="./img/03/chevron-left.png" alt="">
-        <img id="chevron-right" src="./img/03/chevron-right.png" alt="">
-        <a-asset-item id="PBV" src="./glb/13.glb"></a-asset-item>
-      </a-assets>
+        <a-assets>
+            <img id="mainbg" src="./img/03/main00.png" alt="">
+            <img id="main01" src="./img/03/main1-1.png" alt="">
+            <img id="main02" src="./img/03/main1-2.png" alt="">
+            <img id="main03" src="./img/03/main1-3.png" alt="">
+            <img id="main04" src="./img/03/main1-4.png" alt="">
+            <img id="main05" src="./img/03/main1-5.png" alt="">
+            <img id="main06" src="./img/03/main1-6.png" alt="">
+            <img id="main07" src="./img/03/main1-7.png" alt="">
+            <img id="main08" src="./img/03/main1-8.png" alt=""> 
+            <img id="main09" src="./img/03/main2.png" alt="">
 
-      <a-camera position="0 0 10">
-        <a-cursor rayOrigin="mouse" fuse="false"
-        material="color: white; shader: flat;"
-        geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;">
-      </a-cursor>
-      </a-camera>
+            <img id="main2-00" src="./img/03/main02.png" alt=""> 
+            <img id="main2-01" src="./img/03/main02-1.png" alt=""> 
+            <img id="main2-02" src="./img/03/main02-2.png" alt="">
+            <img id="main2-03" src="./img/03/main02-3.png" alt=""> 
 
-      <!-- PBV 모델 -->
-      <a-entity id="pbvEntity" gltf-model="#PBV" position="2 -0.5 9.8" scale="1 1 1" rotation="0 270 0"></a-entity>
-      <a-sky src="#background"></a-sky>
+            <img id="left01" src="./img/03/left01.png" alt="">
+            <img id="left02" src="./img/03/left02.png" alt="">
+            <img id="left03" src="./img/03/left03.png" alt="">
 
-      <!-- 이미지 그룹 -->
-      <a-entity id="thumbnailGroup" position="0.15 0 8.5">
-        <a-plane id="mainbgPlane" position="-0.2 0.1 0.4" width="1.2" height="0.7" 
-        material="src: #mainbg; opacity: 0.8" draggable></a-plane>
-        <a-plane class="thumbnail" id="main01Plane" position="-0.6 0.15 0.45" width="0.2" height="0.15" 
-                 material="src: #main01; opacity: 0.9" draggable></a-plane>
-        <a-plane class="thumbnail" id="main02Plane" position="-0.35 0.15 0.45" width="0.2" height="0.15" 
-                 material="src: #main02; opacity: 0.9" draggable></a-plane>
-        <a-plane class="thumbnail" id="main03Plane" position="-0.1 0.15 0.45" width="0.2" height="0.15" 
-                 material="src: #main03; opacity: 0.9" draggable></a-plane>
-        <a-plane class="thumbnail" id="main04Plane" position="0.15 0.15 0.45" width="0.2" height="0.15" 
-                 material="src: #main04; opacity: 0.9" draggable></a-plane>
-        <a-plane class="thumbnail" id="main05Plane" position="-0.6 -0.05 0.45" width="0.2" height="0.15" 
-                 material="src: #main05; opacity: 0.9" draggable></a-plane>
-        <a-plane class="thumbnail" id="main06Plane" position="-0.35 -0.05 0.45" width="0.2" height="0.15" 
-                 material="src: #main06; opacity: 0.9" draggable></a-plane>        
-        <a-plane class="thumbnail" id="main07Plane" position="-0.1 -0.05 0.45" width="0.2" height="0.15" 
-                 material="src: #main07; opacity: 0.9" draggable></a-plane>
-        <a-plane class="thumbnail" id="main08Plane" position="0.15 -0.05 0.45" width="0.2" height="0.15" 
-                 material="src: #main08; opacity: 0.9" draggable></a-plane>
-      </a-entity>
+            <img id="right01" src="./img/03/right01.png" alt="">
+            <img id="right02" src="./img/03/right02.png" alt="">
+            <img id="right02-1" src="./img/03/right02-1.png" alt="">
+            <img id="right02-2" src="./img/03/right02-2.png" alt="">
+            <img id="right02-3" src="./img/03/right02-3.png" alt="">
+            
+            <img id="chevron-left" src="./img/03/chevron-left.png" alt="">
+            <img id="chevron-right" src="./img/03/chevron-right.png" alt="">
+            <a-asset-item id="PBV" src="./glb/13.glb"></a-asset-item>
+        </a-assets>
 
-      <!-- 메인 -->
-      <a-entity position="0.15 0 8.5">
-          <a-plane id="main09Plane" position="-0.2 0.1 0.4" width="1.2" height="0.7" 
-                  material="src: #main09; opacity: 0.8" visible="false"></a-plane>
-      </a-entity>
+        <a-camera position="0 0 10">
+            <a-cursor rayOrigin="mouse" fuse="false"
+            material="color: white; shader: flat;"
+            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;">
+            </a-cursor>
+        </a-camera>
 
-      <!-- 왼쪽 사이드 -->
-      <a-entity position="-1.7 0.1 9" rotation="0 90 0">
-          <a-plane id="left01Plane" width="1.6" height="1.2" position="-0.1 0 0"
-                  material="src: #left01; opacity: 0.8" visible="false"></a-plane>
-          <a-entity position="-0.9 -0.1 0.6"> <!-- chevrons의 위치를 조정 -->
-            <a-image id="chevronLeft" src="#chevron-left" width="0.08" height="0.08" position="0 0 0.2"
-                      event-set__mouseenter="scale: 1.1 1.1 1; dur: 300"
-                      event-set__mouseleave="scale: 1 1 1; dur: 300"></a-image>
-            <a-image id="chevronRight" src="#chevron-right" width="0.08" height="0.08" position="0.75 0 0.2"
-                      event-set__mouseenter="scale: 1.1 1.1 1; dur: 300"
-                      event-set__mouseleave="scale: 1 1 1; dur: 300" position="0.25 0 0"></a-image> <!-- 옆으로 이동 -->
-          </a-entity>
-      </a-entity>
-      
-      <!-- 오른쪽 사이드 -->
-      <a-entity position="1.6 0.1 9" rotation="0 -90 0">
-          <a-plane id="right01Plane" width="1.45" height="1.2" 
-                  material="src: #right01; opacity: 0.8" visible="false"></a-plane>
-      </a-entity>
+        <!-- PBV 모델 -->
+        <a-entity id="pbvEntity" gltf-model="#PBV" position="2 -0.5 9.8" scale="1 1 1" rotation="0 270 0"></a-entity>
+        <a-sky src="#background"></a-sky>
+
+        <!-- 이미지 그룹 -->
+        <a-entity id="thumbnailGroup" position="0.15 0 8.5">
+            <a-plane id="mainbgPlane" position="-0.2 0.1 0.4" width="1.2" height="0.7" 
+            material="src: #mainbg; opacity: 0.8" draggable></a-plane>
+            <a-plane class="thumbnail" id="main01Plane" position="-0.6 0.15 0.45" width="0.2" height="0.15" 
+                     material="src: #main01; opacity: 0.9" draggable></a-plane>
+            <a-plane class="thumbnail" id="main02Plane" position="-0.35 0.15 0.45" width="0.2" height="0.15" 
+                     material="src: #main02; opacity: 0.9" draggable></a-plane>
+            <a-plane class="thumbnail" id="main03Plane" position="-0.1 0.15 0.45" width="0.2" height="0.15" 
+                     material="src: #main03; opacity: 0.9" draggable></a-plane>
+            <a-plane class="thumbnail" id="main04Plane" position="0.15 0.15 0.45" width="0.2" height="0.15" 
+                     material="src: #main04; opacity: 0.9" draggable></a-plane>
+            <a-plane class="thumbnail" id="main05Plane" position="-0.6 -0.05 0.45" width="0.2" height="0.15" 
+                     material="src: #main05; opacity: 0.9" draggable></a-plane>
+            <a-plane class="thumbnail" id="main06Plane" position="-0.35 -0.05 0.45" width="0.2" height="0.15" 
+                     material="src: #main06; opacity: 0.9" draggable></a-plane>        
+            <a-plane class="thumbnail" id="main07Plane" position="-0.1 -0.05 0.45" width="0.2" height="0.15" 
+                     material="src: #main07; opacity: 0.9" draggable></a-plane>
+            <a-plane class="thumbnail" id="main08Plane" position="0.15 -0.05 0.45" width="0.2" height="0.15" 
+                     material="src: #main08; opacity: 0.9" draggable></a-plane>
+        </a-entity>
+
+        <!-- 메인 -->
+        <a-entity position="0.15 0 8.5">
+            <a-plane id="main09Plane" position="-0.2 0.1 0.4" width="1.2" height="0.7" 
+                    material="src: #main09; opacity: 0.8" visible="false"></a-plane>
+            <a-plane id="main200Plane" position="-0.2 0.1 0.4" width="1.2" height="0.7" 
+                    material="src: #main2-00; opacity: 0.8" visible="false"></a-plane>
+            <a-plane id="main201Plane" position="-0.2 0.1 0.4" width="1.2" height="0.7" 
+                    material="src: #main2-01; opacity: 0.8" visible="false"></a-plane>
+            <a-plane id="main202Plane" position="-0.2 0.1 0.4" width="1.2" height="0.7" 
+                    material="src: #main2-02; opacity: 0.8" visible="false"></a-plane>
+            <a-plane id="main203Plane" position="-0.2 0.1 0.4" width="1.2" height="0.7" 
+                    material="src: #main2-03; opacity: 0.8" visible="false"></a-plane>
+        </a-entity>
+
+        <!-- 재생하기 버튼 -->
+        <a-plane id="playButton" position="0.2 -0.1 9" width="0.15" height="0.08" 
+                 color="#4CAF50" visible="false" event-set__click="scale: 1.1 1.1 1; dur: 300">
+            <a-text value="재생하기" align="center" position="0 0 0.01" color="white"></a-text>
+        </a-plane>
+
+        <!-- 왼쪽 사이드 -->
+        <a-entity position="-1.7 0.1 9" rotation="0 90 0">
+            <a-plane id="left01Plane" width="1.6" height="1.2" position="-0.1 0 0"
+                    material="src: #left01; opacity: 0.8" visible="false"></a-plane>
+            <a-entity position="-0.9 -0.1 0.6"> <!-- chevrons의 위치를 조정 -->
+                <a-image id="chevronLeft" src="#chevron-left" width="0.08" height="0.08" position="0 0 0.2"
+                          event-set__mouseenter="scale: 1.1 1.1 1; dur: 300"
+                          event-set__mouseleave="scale: 1 1 1; dur: 300" visible="false"></a-image>
+                <a-image id="chevronRight" src="#chevron-right" width="0.08" height="0.08" position="0.75 0 0.2"
+                          event-set__mouseenter="scale: 1.1 1.1 1; dur: 300"
+                          event-set__mouseleave="scale: 1 1 1; dur: 300" visible="false"></a-image>
+            </a-entity>
+        </a-entity>
+        
+        <!-- 오른쪽 사이드 -->
+        <a-entity position="1.6 0.1 9" rotation="0 -90 0">
+            <a-plane id="right01Plane" width="1.45" height="1.2" 
+                    material="src: #right01; opacity: 0.8" visible="false"></a-plane>
+            <a-plane id="right020Plane" position="0 0 0"  width="1.45" height="1.2" 
+                     material="src: #right02; opacity: 0.9" visible="false"></a-plane>
+
+            <a-plane id="right021Plane" position="-0.3 0.2 0.1" width="0.5" height="0.2" 
+                     material="src: #right02-1; opacity: 0.9" visible="false"></a-plane>
+            <a-plane id="right022Plane" position="-0.3 -0.1 0.1" width="0.5" height="0.2" 
+                     material="src: #right02-2; opacity: 0.9" visible="false"></a-plane>
+            <a-plane id="right023Plane" position="-0.3 -0.4 0.1" width="0.5" height="0.2" 
+                     material="src: #right02-3; opacity: 0.9" visible="false"></a-plane>
+        </a-entity>
 
     </a-scene>
     
@@ -124,17 +160,65 @@
           });
         });
       });
-      
-      // #main01Plane 클릭 시 처리
-      document.getElementById('main01Plane').addEventListener('click', () => {
-        // 모든 썸네일과 메인 배경 숨기기
-        document.getElementById('mainbgPlane').setAttribute('visible', 'false');
-        thumbnails.forEach(thumbnail => thumbnail.setAttribute('visible', 'false'));
-      
-        // #main02Plane, 왼쪽 및 오른쪽 사이드 표시
-        document.getElementById('main09Plane').setAttribute('visible', 'true');
-        document.getElementById('right01Plane').setAttribute('visible', 'true');
-        document.getElementById('left01Plane').setAttribute('visible', 'true');
+
+      // 모든 main 클릭 시 처리
+      const mainPlanes = [
+        'main01Plane', 'main02Plane', 'main03Plane',
+        'main04Plane', 'main05Plane', 'main06Plane',
+        'main07Plane', 'main08Plane'
+      ];
+
+      mainPlanes.forEach(plane => {
+        document.getElementById(plane).addEventListener('click', () => {
+          // 모든 썸네일과 메인 배경 숨기기
+          document.getElementById('mainbgPlane').setAttribute('visible', 'false');
+          thumbnails.forEach(thumbnail => thumbnail.setAttribute('visible', 'false'));
+          
+          // 모든 mainPlanes 숨기기
+          mainPlanes.forEach(p => {
+            document.getElementById(p).setAttribute('visible', 'false');
+          });
+
+          // #main09Plane, 왼쪽 및 오른쪽 사이드 표시
+          document.getElementById('main09Plane').setAttribute('visible', 'true');
+          document.getElementById('playButton').setAttribute('visible', 'true'); // 재생하기 버튼 보이기
+          document.getElementById('right01Plane').setAttribute('visible', 'true');
+          document.getElementById('left01Plane').setAttribute('visible', 'true');
+
+          // Chevron 버튼 보이기
+          document.getElementById('chevronLeft').setAttribute('visible', 'true');
+          document.getElementById('chevronRight').setAttribute('visible', 'true');
+        });
+      });
+
+      // 재생하기 버튼 클릭 시
+      document.getElementById('playButton').addEventListener('click', () => {
+        // #main09Plane 사라지고 #main2-00Plane 보이기
+        document.getElementById('main09Plane').setAttribute('visible', 'false');
+        document.getElementById('main200Plane').setAttribute('visible', 'true');
+
+        // 오른쪽 사이드 화면 나타내기
+        document.getElementById('right01Plane').setAttribute('visible', 'false'); // right01Plane 사라짐
+        document.getElementById('right020Plane').setAttribute('visible', 'true');
+        document.getElementById('right021Plane').setAttribute('visible', 'true');
+        document.getElementById('right022Plane').setAttribute('visible', 'true');
+        document.getElementById('right023Plane').setAttribute('visible', 'true');
+      });
+
+      // 오른쪽 사이드 클릭 이벤트
+      document.getElementById('right021Plane').addEventListener('click', () => {
+        document.getElementById('main200Plane').setAttribute('visible', 'false');
+        document.getElementById('main201Plane').setAttribute('visible', 'true');
+      });
+
+      document.getElementById('right022Plane').addEventListener('click', () => {
+        document.getElementById('main200Plane').setAttribute('visible', 'false');
+        document.getElementById('main202Plane').setAttribute('visible', 'true');
+      });
+
+      document.getElementById('right023Plane').addEventListener('click', () => {
+        document.getElementById('main200Plane').setAttribute('visible', 'false');
+        document.getElementById('main203Plane').setAttribute('visible', 'true');
       });
 
       // Chevron 버튼 클릭 처리
@@ -147,6 +231,12 @@
           currentLeftImageIndex++;
           document.getElementById('left01Plane').setAttribute('material', 'src: #' + leftImages[currentLeftImageIndex - 1]);
         }
+        // Chevron 버튼 비활성화
+        if (currentLeftImageIndex === leftImages.length) {
+          document.getElementById('chevronRight').setAttribute('visible', 'false');
+        }
+        // Chevron Left 버튼 활성화
+        document.getElementById('chevronLeft').setAttribute('visible', 'true');
       });
 
       // Chevron Left 클릭 이벤트
@@ -155,7 +245,13 @@
           currentLeftImageIndex--;
           document.getElementById('left01Plane').setAttribute('material', 'src: #' + leftImages[currentLeftImageIndex - 1]);
         }
+        // Chevron 버튼 비활성화
+        if (currentLeftImageIndex === 1) {
+          document.getElementById('chevronLeft').setAttribute('visible', 'false');
+        }
+        // Chevron Right 버튼 활성화
+        document.getElementById('chevronRight').setAttribute('visible', 'true');
       });
     </script>
-  </body>
+</body>
 </html>
